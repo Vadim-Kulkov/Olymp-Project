@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: life-status
+      author: Vadim Kulkov
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: ';'
+            path: db/changelog/sql/life-status-enum.sql
+            stripComments: true

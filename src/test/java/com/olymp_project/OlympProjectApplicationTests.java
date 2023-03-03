@@ -1,4 +1,4 @@
-package com.example.olymp_project;
+package com.olymp_project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

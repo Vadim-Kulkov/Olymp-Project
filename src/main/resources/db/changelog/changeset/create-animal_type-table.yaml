@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: animal-type
+      author: Vadim Kulkov
+      changes:
+        - createTable:
+            tableName: animal_type
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(250)

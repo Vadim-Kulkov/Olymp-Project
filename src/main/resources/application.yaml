@@ -1,0 +1,34 @@
+DB_SCHEMA: public
+DB_PASSWORD: e0VdC~0wO@JHfHZ$CS56RbY1o|DtKfTqpiiRL~O#vCKaCdwfX207}
+DB_USERNAME: postgres
+server:
+  port: 8080
+logging:
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    com.imdbsecondedition: DEBUG
+spring:
+  #Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/animal-chipization?currentSchema=${DB_SCHEMA}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  #Migrations
+  liquibase:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/animal-chipization?currentSchema=${DB_SCHEMA}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    change-log: db/changelog/changelog-master.yaml
+    default-schema: public
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: none
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true

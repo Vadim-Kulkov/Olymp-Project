@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: gender
+      author: Vadim Kulkov
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            endDelimiter: ';'
+            path: db/changelog/sql/gender-enum.sql
+            stripComments: true

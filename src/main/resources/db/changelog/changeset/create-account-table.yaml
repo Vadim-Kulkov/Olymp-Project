@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: create-account
+      author: Vadim Kulkov
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(300)
+              - column:
+                  name: last_name
+                  type: varchar(300)
+              - column:
+                  name: email
+                  type: varchar(400)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(500)
+                  constraints:
+                    nullable: false

@@ -1,8 +1,12 @@
-package com.example.olymp_project;
+package com.olymp_project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EnableAspectJAutoProxy
+@EnableJpaRepositories
 @SpringBootApplication
 public class OlympProjectApplication {
 
