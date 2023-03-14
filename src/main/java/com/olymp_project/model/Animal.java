@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,16 +20,14 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "animal", schema = "public")
-public class Animal {
+public class Animal implements Serializable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "animal_animaltype",
             joinColumns = @JoinColumn(name = "animal_id", referencedColumnName = "id"),
@@ -44,25 +43,26 @@ public class Animal {
     @Column(name = "height")
     private Float height;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "life_status")
     private LifeStatus lifeStatus;
 
     @Column(name = "chipping_date_time")
     private LocalDateTime chippingDateTime;
 
+
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "chipper_id")
-    private Account chipperId;
+    private Account chipper;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "chipping_location_id")
-    private Location chippingLocationId;
+    private Location chippingLocation;
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "animal_location",
@@ -81,16 +81,16 @@ public class Animal {
         Animal animal = (Animal) o;
 
         if (!chippingDateTime.equals(animal.chippingDateTime)) return false;
-        if (!chipperId.equals(animal.chipperId)) return false;
-        if (!chippingLocationId.equals(animal.chippingLocationId)) return false;
+        if (!chipper.equals(animal.chipper)) return false;
+        if (!chippingLocation.equals(animal.chippingLocation)) return false;
         return Objects.equals(deathDateTime, animal.deathDateTime);
     }
 
     @Override
     public int hashCode() {
         int result = chippingDateTime.hashCode();
-        result = 31 * result + chipperId.hashCode();
-        result = 31 * result + chippingLocationId.hashCode();
+        result = 31 * result + chipper.hashCode();
+        result = 31 * result + chippingLocation.hashCode();
         result = 31 * result + (deathDateTime != null ? deathDateTime.hashCode() : 0);
         return result;
     }

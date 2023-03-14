@@ -40,9 +40,6 @@ databaseChangeLog:
                   name: chipping_location_id
                   type: bigint
               - column:
-                  name: visited_locations
-                  type: bigint[]
-              - column:
                   name: death_date_time
                   type: timestamp
         - addForeignKeyConstraint:

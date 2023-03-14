@@ -1,5 +1,6 @@
 package com.olymp_project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Account {
     @Column(name = "email", unique = true, nullable = false)
     String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     String password;
 

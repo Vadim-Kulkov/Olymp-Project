@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class HttpHandlerAspect {
 
-    @Around("execution(public Object findById(Long))")
-    public Object aroundFindByIdAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        Object targetMethodResult;
-        try {
-            targetMethodResult = proceedingJoinPoint.proceed();
-        } catch (NumberFormatException e) {
-            targetMethodResult = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return targetMethodResult;
-    }
+//    @Around("execution(public Object findById(Long))")
+//    public Object aroundFindByIdAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+//        Object targetMethodResult;
+//        try {
+//            targetMethodResult = proceedingJoinPoint.proceed();
+//        } catch (NumberFormatException e) {
+//            targetMethodResult = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//        return targetMethodResult;
+//    }
 
 }

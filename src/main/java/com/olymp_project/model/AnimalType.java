@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -14,7 +15,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "animal_type", schema = "public")
-public class AnimalType {
+public class AnimalType implements Serializable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
