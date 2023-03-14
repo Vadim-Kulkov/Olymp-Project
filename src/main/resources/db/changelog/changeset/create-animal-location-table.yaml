@@ -9,11 +9,21 @@ databaseChangeLog:
             tableName: animal_location
             columns:
               - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: animal_id
                   type: bigint
               - column:
                   name: location_id
                   type: bigint
+              - column:
+                  name: visit_datetime
+                  type: timestamp
         - addForeignKeyConstraint:
             baseColumnNames: animal_id
             baseTableName: animal_location

@@ -2,6 +2,7 @@ package com.olymp_project.dto.converter;
 
 import com.olymp_project.dto.AnimalDto;
 import com.olymp_project.model.Animal;
+import com.olymp_project.model.AnimalLocation;
 import com.olymp_project.model.AnimalType;
 import com.olymp_project.model.Location;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,6 @@ public class AnimalDtoConverter implements GenericConverter<Animal, AnimalDto> {
     public AnimalDto apply(Animal input) {
 
         AnimalDto output = new AnimalDto();
-
         output.setId(input.getId());
 
         Set<AnimalType> animalTypeSet = input.getAnimalTypes();
@@ -30,7 +30,7 @@ public class AnimalDtoConverter implements GenericConverter<Animal, AnimalDto> {
         output.setChippingDateTime(input.getChippingDateTime());
         output.setChipperId(input.getChipper().getId());
         output.setChippingLocationId(input.getChippingLocation().getId());
-        output.setVisitedLocations(input.getVisitedLocations().stream().map(Location::getId).collect(Collectors.toSet()));
+        output.setVisitedLocations(input.getVisitedLocations().stream().map(AnimalLocation::getId).collect(Collectors.toSet()));
         output.setDeathDateTime(input.getDeathDateTime());
         return output;
     }

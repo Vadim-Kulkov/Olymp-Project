@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "account", schema = "public")
-public class Account {
+public class Account implements Serializable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)

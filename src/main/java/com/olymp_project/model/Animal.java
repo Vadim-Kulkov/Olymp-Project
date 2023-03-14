@@ -2,9 +2,6 @@ package com.olymp_project.model;
 
 import com.olymp_project.types.Gender;
 import com.olymp_project.types.LifeStatus;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -63,12 +60,8 @@ public class Animal implements Serializable {
     @JoinColumn(name = "chipping_location_id")
     private Location chippingLocation;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "animal_location",
-            joinColumns = @JoinColumn(name = "animal_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "location_id", referencedColumnName = "id"))
-    private Set<Location> visitedLocations;
+    @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Set<AnimalLocation> visitedLocations;
 
     @Column(name = "death_date_time")
     private LocalDateTime deathDateTime;
