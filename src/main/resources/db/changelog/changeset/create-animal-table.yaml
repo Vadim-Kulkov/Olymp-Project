@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: animal
+      author: Vadim Kulkov
+      changes:
+        - createTable:
+            tableName: animal
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: weight
+                  type: float8
+              - column:
+                  name: length
+                  type: float8
+              - column:
+                  name: height
+                  type: float8
+              - column:
+                  name: gender
+                  type: gender
+              - column:
+                  name: life_status
+                  type: life_status
+              - column:
+                  name: chipping_date_time
+                  type: timestamp
+              - column:
+                  name: chipper_id
+                  type: bigint
+              - column:
+                  name: chipping_location_id
+                  type: bigint
+              - column:
+                  name: death_date_time
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseColumnNames: chipper_id
+            baseTableName: animal
+            baseTableSchemaName: public
+            constraintName: fk_animal_chipper
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: account
+            referencedTableSchemaName: public
+        - addForeignKeyConstraint:
+            baseColumnNames: chipping_location_id
+            baseTableName: animal
+            baseTableSchemaName: public
+            constraintName: fk_animal_chipping_location
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: location
+            referencedTableSchemaName: public

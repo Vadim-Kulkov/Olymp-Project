@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: animal-animal_type
+      author: Vadim Kulkov
+      changes:
+        - createTable:
+            tableName: animal_animaltype
+            columns:
+              - column:
+                  name: animal_id
+                  type: bigint
+              - column:
+                  name: animaltype_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: animal_id
+            baseTableName: animal_animaltype
+            baseTableSchemaName: public
+            constraintName: fk_animal_animaltype_animal
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: animal
+            referencedTableSchemaName: public
+        - addForeignKeyConstraint:
+            baseColumnNames: animaltype_id
+            baseTableName: animal_animaltype
+            baseTableSchemaName: public
+            constraintName: fk_animal_animaltype_animal_type
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: animal_type
+            referencedTableSchemaName: public

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    com.imdbsecondedition: DEBUG
+spring:
+  #Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  #Migrations
+  liquibase:
+    enabled: true
+    url: ${SPRING_DATASOURCE_URL}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    change-log: db/changelog/changelog-master.yaml
+    default-schema: public
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: none
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true

@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - runAlways: true
+  - runOnChange: true
+  - changeSet:
+      id: animal-location
+      author: Vadim Kulkov
+      changes:
+        - createTable:
+            tableName: animal_location
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: animal_id
+                  type: bigint
+              - column:
+                  name: location_id
+                  type: bigint
+              - column:
+                  name: visit_datetime
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseColumnNames: animal_id
+            baseTableName: animal_location
+            baseTableSchemaName: public
+            constraintName: fk_animal_location
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: animal
+            referencedTableSchemaName: public
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: animal_location
+            baseTableSchemaName: public
+            constraintName: fk_location_animal
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: location
+            referencedTableSchemaName: public
